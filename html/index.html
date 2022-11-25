@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="../css/style.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+        <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+        <title>Document</title>
+    </head>
+    <body>
+        <div class="wrapper">
+            <header>Upload File</header>
+            <form action="#">
+                <input type="file" name="file" class="file-input" hidden />
+                <div class="icon"><i class="fas fa-cloud-upload-alt"></i></div>
+                <p>Drag files here</p>
+            </form>
+
+            <section class="progress">
+                <!-- PROGRESS -->
+                <li class="row">
+                    <i class="fas fa-file-alt"></i>
+                    <div class="content">
+                      <div class="details">
+                        <span class="name">${name} • Uploading</span>
+                        <span class="percent">${fileLoaded}%</span>
+                      </div>
+                      <div class="progress-bar">
+                        <div class="progress"></div>
+                      </div>
+                    </div>
+                  </li>
+            </section>
+
+            <!-- UPLOADED -->
+            <section class="uploaded">
+                <li class="row">
+                    <div class="content upload">
+                      <i class="fas fa-file-alt"></i>
+                      <div class="details">
+                        <span class="name">${name} • Uploaded</span>
+                        <span class="size">${fileSize}</span>
+                      </div>
+                    </div>
+                    <i class="fas fa-check"></i>
+                  </li>
+            </section>
+        </div>
+    </body>
+    <script src="../js/script.js"></script>
+</html>
