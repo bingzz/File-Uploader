@@ -13,6 +13,41 @@ body {
     background: #6990f2;
 }
 .wrapper {
+    background-color: #fff;
+    padding: 2em;
+    width: 30em;
+    border-radius: 5px;
+    box-shadow: 7px 7px 12px rgba(0, 0, 0, 0.05);
+    font-size: 1.5em;
+}
+.wrapper .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
+}
+
+.container form {
+    display: grid;
+    text-align: start;
+    /* width: 100%; */
+}
+
+form :where(input, select) {
+    font-size: 1em;
+}
+
+form :where(input, select) {
+    margin-bottom: 1em;
+}
+
+form button[type="submit"] {
+    width: 25%;
+    font-size: 0.9em;
+}
+
+/* 
+.wrapper {
     width: 430px;
     background: #fff;
     border-radius: 5px;
@@ -111,4 +146,4 @@ section .details span {
 }
 .uploaded i.fa-check {
     font-size: 16px;
-}
+} */
