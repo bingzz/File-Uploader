@@ -1,13 +1,13 @@
 const express = require("express");
-(cors = require("cors")),
-    (path = require("path")),
-    (mysql = require("mysql")),
-    (dotenv = require("dotenv")),
-    (morgan = require("morgan")),
-    (bodyParser = require("body-parser"));
+const cors = require("cors");
+const path = require("path");
+const mysql = require("mysql");
+const dotenv = require("dotenv");
+const morgan = require("morgan");
+const bodyParser = require("body-parser");
 
 // MULTIPLE API CONTROLLER DIRECTORIES
-const serverControllers = "uploadFileController";
+const serverControllers = ["./public/uploadFileController"];
 
 const app = express(),
     db = mysql.createConnection({
@@ -24,6 +24,7 @@ dotenv.config({
 app.use(express.json())
     .use(bodyParser.json())
     .use(bodyParser.urlencoded({ extended: true }))
+    .use(bodyParser.json({ type: "application/vnd.api+json" }))
     .use(morgan("combined"))
     .use(
         cors({
@@ -32,8 +33,11 @@ app.use(express.json())
             credentials: true,
         })
     )
-    .use(express.static(path.join(__dirname, "./public")))
-    .set("/api/", serverControllers);
+    .use(express.static(path.join(__dirname, "./public")));
+
+serverControllers.map((item) => {
+    app.use("/api", require(item));
+});
 
 db.connect((error) => {
     try {

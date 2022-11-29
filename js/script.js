@@ -19,11 +19,12 @@ $(document).ready(() => {
             data: JSON.stringify(data),
             crossDomain: true,
             headers: {
-                "Content-Type": "application/x-www-form-urlencoded",
+                "Content-Type": "application/json",
             },
             type: "POST",
             success: (response) => {
-                console.log("Response success");
+                console.log(response);
+                // console.log("Response success");
             },
             error: (error) => {
                 console.log(error);
@@ -31,7 +32,24 @@ $(document).ready(() => {
         });
     });
 
-    
+    $("#testButton").click((e) => {
+
+        $.ajax({
+            url: `http://${url}/testDisplay`,
+            type:"POST",
+            // data: {name: "test"},
+            headers: {
+                "Content-Type": "application/json",
+            },
+            success: (response) => {
+                console.log("Response success");
+            },
+            error: (error) => {
+                console.log(error);
+            }
+        })
+    });
+
     function initializeData() {
         
         const getLocalDate = (value) => {
