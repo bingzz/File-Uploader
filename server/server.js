@@ -3,7 +3,7 @@ const cors = require("cors");
 const path = require("path");
 const mysql = require("mysql");
 const dotenv = require("dotenv");
-const morgan = require("morgan");
+// const morgan = require("morgan");
 const bodyParser = require("body-parser");
 
 // MULTIPLE API CONTROLLER DIRECTORIES
@@ -21,11 +21,11 @@ dotenv.config({
     path: "./envdat.env",
 });
 
-app.use(express.json())
-    .use(bodyParser.json())
-    .use(bodyParser.urlencoded({ extended: true }))
+app.use(express.json({ limit: '2gb'}))
+    .use(bodyParser.json({ limit: '2gb'}))
+    .use(bodyParser.urlencoded({ extended: true, limit: '2gb' }))
     .use(bodyParser.json({ type: "application/vnd.api+json" }))
-    .use(morgan("combined"))
+    // .use(morgan("combined"))
     .use(
         cors({
             origin: ["http://127.0.0.1:5500"],

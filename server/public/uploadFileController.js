@@ -13,31 +13,35 @@ const db = mysql.createConnection({
 
 // serverControllers/uploadFile
 const uploadFile = (req, res) => {
-    console.log(req.body);
-
     let query, insertQuery, queryData;
     query = `SELECT * FROM files`;
 
-    db.query(query, (error, results) => {
-        console.log(results);
-        queryData = {
-            IMEI_ID: req.body.imei,
-            PAO_ID: req.body.pao,
-            BUS_ID: req.body.busNum,
-            FILE: req.body.file,
-        };
-
-        db.query(`INSERT INTO files SET ?`, queryData, (error, results) => {
+    try {
+        db.query(query, (error, results) => {
             if (error) {
-                console.log(error);
+                res.send('error')
             } else {
-                console.log(results);
-                res.send(true);
+                queryData = {
+                    IMEI_ID: req.body['imei'],
+                    FILE_UPLOADED: req.body['date'],
+                    PAO_ID: req.body['pao'],
+                    BUS_ID: req.body['busNum'],
+                    FILE: req.body['file'],
+                };
+
+                db.query(`INSERT INTO files SET ?`, queryData, (error, results) => {
+                    if (error) {
+                        res.send('error add')
+                    } else {
+                        console.log(results);
+                        res.send(true);
+                    }
+                });
             }
         });
-    });
-
-    
+    } catch (err) {
+        console.log(err);
+    }
 };
 
 // END POINTS
@@ -45,13 +49,13 @@ router.post("/uploadFile", (req, res) => {
     uploadFile(req, res);
 });
 
-router.post("/testDisplay", (req, res) => {
-    console.log("test");
+router.get("/testDisplay", (req, res) => {
     db.query(`SELECT * FROM files`, (error, results) => {
-        console.log(results);
-        // console.log(error);
-        // console.log(db);
+        res.send({
+            asdfasfsdf: 'test'
+        })
     });
+    
 });
 
 module.exports = router;
